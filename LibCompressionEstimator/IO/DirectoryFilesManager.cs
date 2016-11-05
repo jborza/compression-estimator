@@ -7,6 +7,8 @@ namespace LibCompressionEstimator.IO
 {
     internal class DirectoryFilesManager
     {       
+        public readonly long Length;
+
         private List<DirectoryRecord> records;
 
         public DirectoryFilesManager(IEnumerable<FileInfo> files)
@@ -24,8 +26,6 @@ namespace LibCompressionEstimator.IO
                 currentFileStart += file.Length;
             }
         }
-
-        public readonly long Length;
 
         internal IEnumerable<ReadInfo> GetFilesToRead(long position, int count)
         {

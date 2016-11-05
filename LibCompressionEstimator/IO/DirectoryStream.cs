@@ -6,12 +6,12 @@ namespace LibCompressionEstimator.IO
 {
     /// <summary>
     /// Provides the equivalent of FileStream over a directory
+    /// Appears as a continuous stream of bytes in the same order as DirectoryInfo.GetFiles() returns the file list.
     /// </summary>
     public class DirectoryStream : Stream
     {
-        private DirectoryFilesManager manager;
-        private long length;
-        private long position;
+        private readonly DirectoryFilesManager manager;
+        private readonly long length;
 
         public DirectoryStream(string directoryName)
         {
@@ -75,6 +75,7 @@ namespace LibCompressionEstimator.IO
             }
         }
 
+        private long position;
         public override long Position
         {
             get { return position; }
