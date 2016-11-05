@@ -6,7 +6,7 @@ using System.Linq;
 namespace LibCompressionEstimator.IO
 {
     internal class DirectoryFilesManager
-    {
+    {       
         private List<DirectoryRecord> records;
 
         public DirectoryFilesManager(IEnumerable<FileInfo> files)
@@ -20,12 +20,7 @@ namespace LibCompressionEstimator.IO
             long currentFileStart = 0;
             foreach (var file in files)
             {
-                yield return new DirectoryRecord()
-                {
-                    File = file,
-                    Start = currentFileStart,
-                    End = currentFileStart + file.Length
-                };
+                yield return new DirectoryRecord(file, start: currentFileStart, end: currentFileStart + file.Length);
                 currentFileStart += file.Length;
             }
         }
@@ -54,18 +49,18 @@ namespace LibCompressionEstimator.IO
             }
         }
 
-        internal class DirectoryRecord
+        private class DirectoryRecord
         {
-            public FileInfo File;
-            public long Start;
-            public long End;
-        }
+            public DirectoryRecord(FileInfo file, long start, long end)
+            {
+                this.File = file;
+                this.Start = start;
+                this.End = end;
+            }
 
-        internal class ReadInfo
-        {
-            public long StartOffset;
-            public int BytesToRead;
-            public FileInfo File;
+            public readonly FileInfo File;
+            public readonly long Start;
+            public readonly long End;
         }
     }
 }
