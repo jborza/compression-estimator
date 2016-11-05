@@ -39,28 +39,24 @@ namespace LibCompressionEstimator.IO
                 var globalStartOffset = Math.Max(currentOffset, f.Start);
                 var globalEndOffset = Math.Min(endPosition, f.End);
                 var bytesToRead = globalEndOffset - globalStartOffset;
-                yield return new ReadInfo()
-                {
-                    File = f.File,
-                    StartOffset = globalStartOffset - f.Start,
-                    BytesToRead = (int)bytesToRead
-                };
+                var fileStartOffset = globalStartOffset - f.Start;
+                yield return new ReadInfo(f.File, fileStartOffset, (int)bytesToRead);
                 currentOffset += bytesToRead;
             }
         }
 
         private class DirectoryRecord
-        {
+        {           
+            public readonly FileInfo File;
+            public readonly long Start;
+            public readonly long End;
+
             public DirectoryRecord(FileInfo file, long start, long end)
             {
                 this.File = file;
                 this.Start = start;
                 this.End = end;
             }
-
-            public readonly FileInfo File;
-            public readonly long Start;
-            public readonly long End;
         }
     }
 }
