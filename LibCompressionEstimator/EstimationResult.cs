@@ -8,6 +8,9 @@ namespace LibCompressionEstimator
         public string ShortName;
         public long OriginalSize;
         public long EstimatedSize;
+
+        public long BytesSavedByCompression => OriginalSize - EstimatedSize;
+
         public double CompressionRatio => OriginalSize == 0 ? Double.NaN : EstimatedSize / (double)OriginalSize * 100.0;
         public bool ShouldBeCompressed(double threshold)
         {

@@ -35,6 +35,18 @@ namespace CompressionEstimator.Tests
         }
 
         [TestMethod]
+        public void SavedBytesTest()
+        {
+            //arrange
+            var de = new DirectoryEstimator();
+            //act
+            var result = de.Estimate(".");
+            //assert
+            var dir = result.Single(p => p.ShortName == "TestDirCompressible");
+            Assert.AreEqual(820650, dir.BytesSavedByCompression);
+        }
+
+        [TestMethod]
         public void EstimateTestForNonCompressible()
         {
             //arrange
@@ -50,7 +62,6 @@ namespace CompressionEstimator.Tests
         [TestMethod]
         public void EstimateTestForCompressible()
         {
-            //run across the output directory
             //arrange
             var de = new DirectoryEstimator();
             //act
