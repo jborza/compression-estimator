@@ -24,11 +24,12 @@ namespace LibCompressionEstimator
 
         public override string ToString()
         {
-            return string.Format("{0} Ratio:{1:0.0}% {2:0}MB->{3:0}MB",
+            return string.Format("{0} Ratio:{1:0.0}% {2:0}MB->{3:0}MB - {4:0}MB saved",
                 ShortName,
                 CompressionRatio,
                 ByteToMB(OriginalSize),
-                ByteToMB(EstimatedSize));
+                ByteToMB(EstimatedSize),
+                ByteToMB(BytesSavedByCompression));
         }
     }
 }
