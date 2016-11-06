@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="IO\DirectoryStreamTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamEstimatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibCompressionEstimator\LibCompressionEstimator.csproj">
