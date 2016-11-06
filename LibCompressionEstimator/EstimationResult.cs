@@ -6,9 +6,9 @@ namespace LibCompressionEstimator
     {
         public string Directory;
         public string ShortName;
-        public long CurrentSize;
+        public long OriginalSize;
         public long EstimatedSize;
-        public double CompressionRatio => CurrentSize == 0 ? Double.NaN : EstimatedSize / (double)CurrentSize * 100.0;
+        public double CompressionRatio => OriginalSize == 0 ? Double.NaN : EstimatedSize / (double)OriginalSize * 100.0;
         public bool ShouldBeCompressed(double threshold)
         {
             return CompressionRatio <= threshold;
@@ -24,7 +24,7 @@ namespace LibCompressionEstimator
             return string.Format("{0} Ratio:{1:0.0}% {2:0}MB->{3:0}MB",
                 ShortName,
                 CompressionRatio,
-                ByteToMB(CurrentSize),
+                ByteToMB(OriginalSize),
                 ByteToMB(EstimatedSize));
         }
     }

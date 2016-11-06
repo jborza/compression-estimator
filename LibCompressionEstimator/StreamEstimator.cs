@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 
 namespace LibCompressionEstimator
@@ -39,7 +40,7 @@ namespace LibCompressionEstimator
                 compressedBytes = ms.Length;
             }
             double estimatedCompressionRatio = (double)compressedBytes / totalReadBytes;
-            return estimatedCompressionRatio;
+            return Math.Min(estimatedCompressionRatio, 1);
         }
 
         private static Stream CreateCompressedStream(Stream stream)

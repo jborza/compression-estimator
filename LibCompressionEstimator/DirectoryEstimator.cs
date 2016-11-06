@@ -35,7 +35,7 @@ namespace LibCompressionEstimator
             {
                 Directory = arg.FullName,
                 ShortName = arg.Name,
-                CurrentSize = ds.Length,
+                OriginalSize = ds.Length,
                 EstimatedSize = packedSize
             };
         }
