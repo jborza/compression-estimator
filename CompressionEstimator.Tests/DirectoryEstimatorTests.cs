@@ -43,7 +43,7 @@ namespace CompressionEstimator.Tests
             var result = de.Estimate(".");
             //assert
             var dirLarge = result.Single(p => p.ShortName == "TestDirLarge");
-            Assert.IsFalse(dirLarge.ShouldBeCompressed(0.75)); //only binary files
+            Assert.IsFalse(dirLarge.ShouldBeCompressed(75)); //only binary files
             Assert.AreEqual(2616384, dirLarge.EstimatedSize);
         }
 
@@ -57,7 +57,7 @@ namespace CompressionEstimator.Tests
             var result = de.Estimate(".");
             //assert
             var dirLarge = result.Single(p => p.ShortName == "TestDirCompressible");
-            Assert.IsTrue(dirLarge.ShouldBeCompressed(0.75)); //only binary files
+            Assert.IsTrue(dirLarge.ShouldBeCompressed(75)); //only binary files
             Assert.AreEqual(198180, dirLarge.EstimatedSize);
         }
     }
