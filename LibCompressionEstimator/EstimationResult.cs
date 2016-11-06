@@ -8,6 +8,7 @@ namespace LibCompressionEstimator
         public string ShortName;
         public long OriginalSize;
         public long EstimatedSize;
+        public bool NtfsCompressed;
 
         public long BytesSavedByCompression => OriginalSize - EstimatedSize;
 

@@ -36,7 +36,8 @@ namespace LibCompressionEstimator
                 Directory = arg.FullName,
                 ShortName = arg.Name,
                 OriginalSize = ds.Length,
-                EstimatedSize = packedSize
+                EstimatedSize = packedSize,
+                NtfsCompressed = (arg.Attributes & FileAttributes.Compressed) == FileAttributes.Compressed
             };
         }
     }
