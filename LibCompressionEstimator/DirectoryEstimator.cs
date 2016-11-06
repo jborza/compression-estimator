@@ -14,16 +14,26 @@ namespace LibCompressionEstimator
         public double Threshold = 0.75;
         public int MAX_READ_SIZE = 1024 * 1024 * 50;
         public int BLOCK_SIZE = 1024 * 512;
+        private readonly bool skipCompressedDirectories;
 
-        public DirectoryEstimator()
+        public DirectoryEstimator(bool skipCompressedDirectories = false)
         {
-
+            this.skipCompressedDirectories = skipCompressedDirectories;
         }
 
         public IEnumerable<EstimationResult> Estimate(string directory)
         {
             var di = new DirectoryInfo(directory);
-            return di.EnumerateDirectories().Select(EstimateDirectory);
+            var enumerator = GetDirectoryEnumerator();
+            return enumerator.EnumerateDirectories(di).Select(EstimateDirectory);
+        }
+
+        private IDirectoryEnumerator GetDirectoryEnumerator()
+        {
+            if (skipCompressedDirectories)
+                return new SkipCompressedDirectoryEnumerator();
+            else
+                return new BasicDirectoryEnumerator();
         }
 
         private EstimationResult EstimateDirectory(DirectoryInfo arg)
@@ -37,7 +47,7 @@ namespace LibCompressionEstimator
                 ShortName = arg.Name,
                 OriginalSize = ds.Length,
                 EstimatedSize = packedSize,
-                NtfsCompressed = (arg.Attributes & FileAttributes.Compressed) == FileAttributes.Compressed
+                NtfsCompressed = arg.IsCompressed()
             };
         }
     }

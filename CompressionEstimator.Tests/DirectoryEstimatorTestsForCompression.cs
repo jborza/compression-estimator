@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Win32.SafeHandles;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Management;
 using LibCompressionEstimator;
 
@@ -60,6 +54,20 @@ namespace CompressionEstimator.Tests
             Assert.IsFalse(compressed.NtfsCompressed);
         }
 
+
+        [TestMethod]
+        public void NtfsCompressedFolderIsSkipped()
+        {
+            //arrange
+            var de = new DirectoryEstimator(skipCompressedDirectories: true);
+            //act
+            //act
+            var result = de.Estimate(BaseDirectory);
+            //assert
+            Assert.AreEqual(1, result.Count());
+            Assert.IsFalse(result.Any(p => p.ShortName == Compressed));
+        }
+
         private static void SetCompressedAttribute(string directory)
         {
             DirectoryInfo di = new DirectoryInfo(directory);
@@ -71,7 +79,5 @@ namespace CompressionEstimator.Tests
                 uint ret = (uint)(outParams.Properties["ReturnValue"].Value);
             }
         }
-
-        
     }
 }

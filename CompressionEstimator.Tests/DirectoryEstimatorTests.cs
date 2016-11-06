@@ -72,5 +72,6 @@ namespace CompressionEstimator.Tests
             Assert.IsTrue(dirLarge.ShouldBeCompressed(75)); //only binary files
             Assert.AreEqual(198180, dirLarge.EstimatedSize);
         }
+
     }
 }
