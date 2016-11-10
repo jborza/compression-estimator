@@ -43,7 +43,10 @@
     <Compile Include="BasicDirectoryEnumerator.cs" />
     <Compile Include="EstimationResult.cs" />
     <Compile Include="IDirectoryEnumerator.cs" />
+    <Compile Include="IEstimatorRunner.cs" />
     <Compile Include="IO\DirectoryInfoExtensions.cs" />
+    <Compile Include="ParallelEstimatorRunner.cs" />
+    <Compile Include="SimpleEstimatorRunner.cs" />
     <Compile Include="SkipCompressedDirectoryEnumerator.cs" />
     <Compile Include="StreamEstimator.cs" />
     <Compile Include="DirectoryEstimator.cs" />

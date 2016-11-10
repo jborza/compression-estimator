@@ -13,7 +13,7 @@ namespace CompressionEstimator
 
         private static void EstimateDirectory(string directory)
         {
-            var est = new DirectoryEstimator();
+            var est = new DirectoryEstimator(skipCompressedDirectories: true);
             Console.WriteLine($"Estimating {directory} with a block size of {est.BLOCK_SIZE} and maximum input size of {est.MAX_READ_SIZE} bytes");
             var results = est.Estimate(directory);
             foreach (var result in results)
