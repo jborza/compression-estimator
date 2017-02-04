@@ -16,7 +16,7 @@ namespace CompressionEstimator.Tests
         public void EstimateTestDiscoversCorrectAmountOfDirectories()
         {
             //arrange
-            var de = new DirectoryEstimator();
+            var de = new DirectoryEstimator(new NoOpLogger());
             //act
             var result = de.Estimate(".");
             //assert
@@ -27,7 +27,7 @@ namespace CompressionEstimator.Tests
         public void OriginalSizeTest()
         {
             // arrange
-            var de = new DirectoryEstimator();
+            var de = new DirectoryEstimator(new NoOpLogger());
             //act
             var result = de.Estimate(".");
             //assert
@@ -39,7 +39,7 @@ namespace CompressionEstimator.Tests
         public void SavedBytesTest()
         {
             //arrange
-            var de = new DirectoryEstimator();
+            var de = new DirectoryEstimator(new NoOpLogger());
             //act
             var result = de.Estimate(".");
             //assert
@@ -51,7 +51,7 @@ namespace CompressionEstimator.Tests
         public void EstimateTestForNonCompressible()
         {
             //arrange
-            var de = new DirectoryEstimator();
+            var de = new DirectoryEstimator(new NoOpLogger());
             //act
             var result = de.Estimate(".");
             //assert
@@ -64,7 +64,7 @@ namespace CompressionEstimator.Tests
         public void EstimateTestForCompressible()
         {
             //arrange
-            var de = new DirectoryEstimator();
+            var de = new DirectoryEstimator(new NoOpLogger());
             //act
             var result = de.Estimate(".");
             //assert

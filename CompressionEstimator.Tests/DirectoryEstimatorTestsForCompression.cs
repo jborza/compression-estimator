@@ -32,7 +32,7 @@ namespace CompressionEstimator.Tests
         public void NtfsCompressedIsReported()
         {
             //arrange
-            var de = new DirectoryEstimator();
+            var de = new DirectoryEstimator(new NoOpLogger());
             //act
             var result = de.Estimate(BaseDirectory);
             //assert
@@ -45,7 +45,7 @@ namespace CompressionEstimator.Tests
         public void NtfsCompressedIsNotReportedForNotCompressedFolder()
         {
             //arrange
-            var de = new DirectoryEstimator();
+            var de = new DirectoryEstimator(new NoOpLogger());
             //act
             var result = de.Estimate(BaseDirectory);
             //assert
@@ -59,7 +59,7 @@ namespace CompressionEstimator.Tests
         public void NtfsCompressedFolderIsSkipped()
         {
             //arrange
-            var de = new DirectoryEstimator(skipCompressedDirectories: true);
+            var de = new DirectoryEstimator(new NoOpLogger(),skipCompressedDirectories: true);
             //act
             //act
             var result = de.Estimate(BaseDirectory);

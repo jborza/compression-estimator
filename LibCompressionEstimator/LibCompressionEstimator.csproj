@@ -44,7 +44,9 @@
     <Compile Include="EstimationResult.cs" />
     <Compile Include="IDirectoryEnumerator.cs" />
     <Compile Include="IEstimatorRunner.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="IO\DirectoryInfoExtensions.cs" />
+    <Compile Include="IO\NativeMethods.cs" />
     <Compile Include="ParallelEstimatorRunner.cs" />
     <Compile Include="SimpleEstimatorRunner.cs" />
     <Compile Include="SkipCompressedDirectoryEnumerator.cs" />
@@ -55,9 +57,7 @@
     <Compile Include="IO\ReadInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Compression\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

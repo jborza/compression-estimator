@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace LibCompressionEstimator
 {
@@ -16,9 +17,11 @@ namespace LibCompressionEstimator
         public int BLOCK_SIZE = 1024 * 512;
         private readonly bool skipCompressedDirectories;
         private readonly bool parallelRun;
+        private readonly ILogger logger;
 
-        public DirectoryEstimator(bool skipCompressedDirectories = false, bool parallelRun = false)
+        public DirectoryEstimator(ILogger logger, bool skipCompressedDirectories = false, bool parallelRun = false)
         {
+            this.logger = logger;
             this.skipCompressedDirectories = skipCompressedDirectories;
             this.parallelRun = parallelRun;
         }
@@ -27,7 +30,7 @@ namespace LibCompressionEstimator
         {
             var di = new DirectoryInfo(directory);
             var enumerator = GetDirectoryEnumerator();
-            var directories = enumerator.EnumerateDirectories(di);
+            var directories = enumerator.EnumerateDirectories(di).ToArray();
             var runner = GetEstimatorRunner();
             return runner.Estimate(directories, EstimateDirectory);
         }
@@ -52,10 +55,11 @@ namespace LibCompressionEstimator
         {
             try
             {
+                logger.Log("Starting: " + arg.Name);
                 DirectoryStream ds = new DirectoryStream(arg.FullName);
                 StreamEstimator se = new StreamEstimator();
                 var packedSize = se.EstimatePackedSize(ds, MAX_READ_SIZE, BLOCK_SIZE);
-                return new EstimationResult()
+                var result = new EstimationResult()
                 {
                     Directory = arg.FullName,
                     ShortName = arg.Name,
@@ -63,6 +67,8 @@ namespace LibCompressionEstimator
                     EstimatedSize = packedSize,
                     NtfsCompressed = arg.IsCompressed()
                 };
+                logger.Log("Finished: " + arg.Name + " - ratio: " + result.CompressionRatio);
+                return result;
             }
             catch (Exception e)
             {

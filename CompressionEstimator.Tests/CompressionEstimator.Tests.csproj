@@ -55,6 +55,7 @@
     <Compile Include="DirectoryEstimatorTestsForCompression.cs" />
     <Compile Include="EstimationResultTests.cs" />
     <Compile Include="IO\DirectoryStreamTests.cs" />
+    <Compile Include="NoOpLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamEstimatorTests.cs" />
   </ItemGroup>
